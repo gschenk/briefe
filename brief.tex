@@ -4,7 +4,7 @@
 \germantrue
 
 %% class call
-\documentclass[a4paper]{scrlttr2}
+\documentclass[a4paper,fromemail]{scrlttr2}
 
 %% load packages
 
@@ -30,6 +30,8 @@
 \fi
 \usepackage{isodate}
 
+% lorem ipsum
+\usepackage{lipsum}
 
 %% some settings
 
@@ -37,10 +39,21 @@
 \isodate
 
 
+\input{private/senderdat}
+\input{private/recipientdat}
+
+
 % body of the letter
 \begin{document}
-  fill in the blank
+  \begin{letter}{}
+    \opening{%
+      Sehr geehrte
+    }
+    \lipsum[1]  %lorem ipsum
+    \closing{%
+      Mit besten Grüssen,
+    }
+  \end{letter}
 \end{document}
 
 % vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_de spell:
-

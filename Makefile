@@ -7,7 +7,7 @@ STY =
 
 # objects
 OBJ =$(addsuffix .tex,$(T))
-OBJ+=
+OBJ+= private/recipientdat.tex private/senderdat.tex
 
 # tex parser
 TEX= pdflatex

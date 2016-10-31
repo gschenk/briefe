@@ -3,7 +3,7 @@ T=brief
 TARGET=$(addsuffix .pdf,$(T))
 
 # configuration
-STY =
+STY = mydefs.sty
 
 # objects
 OBJ =$(addsuffix .tex,$(T))

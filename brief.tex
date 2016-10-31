@@ -3,8 +3,10 @@
 % if for later mutli lang conditionals, defaults to english if false
 \germantrue
 
+
 %% class call
 \documentclass[a4paper,fromemail]{scrlttr2}
+
 
 %% load packages
 
@@ -33,19 +35,27 @@
 % lorem ipsum
 \usepackage{lipsum}
 
+% own definitions
+\usepackage{mydefs}
+
+
 %% some settings
 
 % iso date format
 \isodate
 
-
+% load private data
 \input{private/senderdat}
 \input{private/recipientdat}
 
 
-% body of the letter
+%% body of the letter
 \begin{document}
   \begin{letter}{}
+    %\title{} %put a large title below the head
+    \subject{%
+      lorem ipsum
+    }
     \opening{%
       Sehr geehrte
     }

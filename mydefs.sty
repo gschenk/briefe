@@ -1,0 +1,16 @@
+\NeedsTeXFormat{LaTeX2e} 
+\ProvidesPackage{mydefs}[2016/10/31 defines some macros for scrltr2 letters]
+
+\providecommand{\subject}[1]{%
+  \setkomavar{subject}{#1}
+}
+
+% overwrite latex title macro,
+% assign value to koma variable
+\renewcommand{\title}[1]{%
+  \setkomavar{title}{#1}
+}
+
+
+% vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_de spell:
+

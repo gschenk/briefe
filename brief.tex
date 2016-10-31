@@ -1,0 +1,46 @@
+%% language selection
+\newif\ifgerman
+% if for later mutli lang conditionals, defaults to english if false
+\germantrue
+
+%% class call
+\documentclass[a4paper]{scrlttr2}
+
+%% load packages
+
+% correct encoding to allow accented characters in output
+\usepackage[T1]{fontenc}
+
+% source code is utf8 encoded
+\usepackage[utf8]{inputenc}
+
+% hyphenation patterns
+\ifgerman
+  \PassOptionsToPackage{german}{babel}
+\else
+  \PassOptionsToPackage{english}{babel}
+\fi
+\usepackage{babel}
+
+% finer control of date format
+\ifgerman
+  \PassOptionsToPackage{german}{isodate}
+\else
+  \PassOptionsToPackage{english}{isodate}
+\fi
+\usepackage{isodate}
+
+
+%% some settings
+
+% iso date format
+\isodate
+
+
+% body of the letter
+\begin{document}
+  fill in the blank
+\end{document}
+
+% vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_de spell:
+

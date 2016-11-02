@@ -16,13 +16,6 @@
 % source code is utf8 encoded
 \usepackage[utf8]{inputenc}
 
-% microtype for better typesetting
-\usepackage{microtype}
-
-% libertine font family (biolinum sf)
-\usepackage{libertine}
-\usepackage{libertinust1math}
-
 % hyphenation patterns
 \ifgerman
   \PassOptionsToPackage{german}{babel}
@@ -31,13 +24,6 @@
 \fi
 \usepackage{babel}
 
-% finer control of date format
-\ifgerman
-  \PassOptionsToPackage{german}{isodate}
-\else
-  \PassOptionsToPackage{english}{isodate}
-\fi
-\usepackage{isodate}
 
 % lorem ipsum
 \usepackage{lipsum}
@@ -45,11 +31,17 @@
 % own definitions
 \usepackage{mydefs}
 
+% my style choices
+\ifgerman
+  \PassOptionsToPackage{german}{mystyle}
+\else
+  \PassOptionsToPackage{english}{mystyle}
+\fi
+\usepackage{mystyle}
+
 
 %% some settings
 
-% iso date format
-\isodate
 
 % load private data
 \input{private/senderdat}
@@ -59,9 +51,11 @@
 %% body of the letter
 \begin{document}
   \begin{letter}{}
-    %\title{} %put a large title below the head
-    \subject{%
+    \title{%
       Lorem Ipsum
+    }
+    \subject{%
+      Dolor Sit Amet
     }
     \opening{%
       Sehr geehrte

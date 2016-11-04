@@ -8,7 +8,7 @@ STY = mydefs.sty mystyle.sty
 # objects
 OBJ =$(addsuffix .tex,$(T))
 OBJ+= private/recipients.adr
-OBJ+= private/sender.adr
+OBJ+= private/sender.lco
 
 # tex parser
 TEX= pdflatex

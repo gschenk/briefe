@@ -1,10 +1,9 @@
+\ProvidesFile{sender.lco}[2016/04/11 lco with private address information and some formating things
+(Sender)]
 %% asigns data of the sender to scrltr2 variables
 %% may contain *private* data, make sure not to
 %% place it then into public repos
 
-% this does not use the proper \addrentry
-% format for KOMA .adr files, but standard
-% defines stuff as in a lco or sty
 
 %\setkomavar
 \setkomavar{fromname}{%
@@ -17,9 +16,18 @@
   am grossen Fluss
 }
 
+\setkomavar{fromphone}{%
+  01234
+}
+
 \setkomavar{fromemail}{
   tiger@flaschenpost.invalid
 }
 
+% add some addresses to a right hand box in the header
+\setkomavar{location}{%
+  \usekomavar*{fromphone}\usekomavar{fromphone}\\
+  \usekomavar*{fromemail}\usekomavar{fromemail}
+}
 
 % vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_de spell:

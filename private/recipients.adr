@@ -1,16 +1,22 @@
 %% assignes recipient data to scrltr2 variables
 
-%\setkomavar
-\setkomavar{toname}{%
-  Der Haase
-}
+% uses the form:
+% \addrentry{last-name }{first-name }{address }{phone }{F1}{F2}{F3}{F4}{key }
 
-% return address
-\setkomavar{toaddress}{%
+
+\addrentry{%
+  % family name
+Der Hase
+}{% given name
+}{% address
   beim Weizenfeld\\
-  links vom Fluss
-}
-
+  links vom Fluss%
+}{%phone
+}{%F1
+}{%F2
+}{%F3
+}{%F4
+}{HASE}
 %\setkomavar{yourref}{% Ihr Zeichen
 %}
 

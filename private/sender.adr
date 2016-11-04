@@ -2,6 +2,10 @@
 %% may contain *private* data, make sure not to
 %% place it then into public repos
 
+% this does not use the proper \addrentry
+% format for KOMA .adr files, but standard
+% defines stuff as in a lco or sty
+
 %\setkomavar
 \setkomavar{fromname}{%
   kleiner Tiger

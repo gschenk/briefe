@@ -6,14 +6,18 @@
 
 \addrentry{%
   % family name
-Der Hase
+  Hase%
 }{% given name
+  Hans%
 }{% address
   beim Weizenfeld\\
   links vom Fluss%
 }{%phone
-}{%F1
-}{%F2
+}{%F1 % gramatical genus/sexus, one char
+  % takes f(em), m(as), n(eutral), p(lural)
+ m
+}{%F2 accademic degree, eg "Dr.\ %"
+%  Dr.\ %
 }{%F3
 }{%F4
 }{HASE}

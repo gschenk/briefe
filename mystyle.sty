@@ -36,5 +36,54 @@
 \RequirePackage{isodate}
 \isodate
 
+
+%% recipient address line
+%  takes handle from .adr file \addrentry #9
+%  entry as argument
+\RequirePackage{scraddr}
+\newcommand{\AutoRecipientAddress}[1]{%
+  \FirstName{#1}
+  \LastName{#1}
+  \\
+  \Address{#1}
+}
+
+%% opening, salutation
+\newcommand{\AutoOpening}[1]{}
+\ifgerman
+  \providecommand{\fSal}{Sehr geehrte Frau }
+  \providecommand{\mSal}{Sehr geehrter Herr }
+  \providecommand{\genSal}{Sehr geehrte Damen und Herren,}
+\else
+  \providecommand{\fSal}{Dear Ms}
+  \providecommand{\mSal}{Dear Mr}
+  \providecommand{\genSal}{To whom it may concern}
+\fi
+\providecommand{\SalutationName}[1]{%
+  \ifgerman % no point after abbr in UK english
+    \FreeII{#1}%academic degrees Dr and Prof
+  \fi
+  \LastName{#1}%
+  \ifgerman % no comma in modern english
+    ,
+  \fi
+}
+\renewcommand{\AutoOpening}[1]{%
+  % check for the correct case,
+  % that can be stored in the first
+  % free argument of \addrentry (ie #5)
+  \if f\FreeI{#1}%
+    \fSal
+  \else \if m\FreeI{#1}%
+      \mSal
+    \else
+      \genSal
+      \renewcommand{\SalutationName}[1]{}
+    \fi
+  \fi
+  \SalutationName{#1}
+}
+
+
 % vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_de spell:
 

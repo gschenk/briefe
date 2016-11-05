@@ -3,7 +3,6 @@
 % if for later mutli lang conditionals, defaults to english if false
 \germantrue
 
-
 %% class call
 \documentclass[a4paper]{scrlttr2}
 
@@ -46,12 +45,23 @@
 
 % load private data
 \LoadLetterOptions{private/sender}
-\input{private/recipients.adr}
 
+%\input{private/recipients.adr}
+
+\usepackage{scraddr}
+\InputAddressFile{private/recipients}
+
+
+%% Define the Recipient here!
+%  The handle is the last argument
+%  of the \addrentry in private/recipients.adr
+\renewcommand{\Recipient}{HASE}
 
 %% body of the letter
 \begin{document}
-  \begin{letter}{\HASE}
+  \begin{letter}{%
+    \AutoRecipientAddress{\Recipient}%
+    }
     \title{%
       Lorem Ipsum
     }
@@ -59,7 +69,7 @@
       Dolor Sit Amet
     }
     \opening{%
-      Sehr geehrte
+      \AutoOpening{\Recipient}
     }
     \lipsum[1]  %lorem ipsum
     \closing{%

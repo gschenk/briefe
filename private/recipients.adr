@@ -16,10 +16,12 @@
 }{%F1 % gramatical genus/sexus, one char
   % takes f(em), m(as), n(eutral), p(lural)
  m
-}{%F2 accademic degree, eg "Dr.\ %"
-%  Dr.\ %
-}{%F3
-}{%F4
+}{%F2 accademic degree, in salutation
+%  Professor %
+}{%F3  accademic degrees in address
+%  Prof.\ Dr.\ %
+}{%F4 second address field
+%  (Karottenexperte)\\
 }{HASE}
 %\setkomavar{yourref}{% Ihr Zeichen
 %}

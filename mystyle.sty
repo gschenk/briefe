@@ -52,9 +52,19 @@
 %  entry as argument
 \RequirePackage{scraddr}
 \newcommand{\AutoRecipientAddress}[1]{%
+  \ifgerman
+    \if m\FreeI{#1}
+      {Herrn \\}
+    \fi
+    \if f\FreeI{#1}
+      {Frau \\}
+    \fi
+    \FreeIII{#1}%
+  \fi
   \FirstName{#1}
   \LastName{#1}
   \\
+  \FreeIV{#1}
   \Address{#1}
 }
 
@@ -69,6 +79,7 @@
   \providecommand{\mSal}{Dear Mr}
   \providecommand{\genSal}{To whom it may concern}
 \fi
+
 \providecommand{\SalutationName}[1]{%
   \ifgerman % no point after abbr in UK english
     \FreeII{#1}%academic degrees Dr and Prof

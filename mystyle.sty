@@ -3,15 +3,25 @@
 
 \RequirePackage{ifthen}
 
+\newif\ifgerman
 
 \DeclareOption{english}{%
+  \germanfalse
+  \PassOptionsToPackage{english}{babel}
 }
 
 \DeclareOption{german}{%
+  \germantrue
+  \PassOptionsToPackage{german}{babel}
 }
 
 \ProcessOptions
 
+%% class options scrlttr2 options
+\LoadLetterOptions{DINmtext} %mtext}
+
+% hyphenation patterns
+\RequirePackage{babel}
 
 % microtype for better typesetting
 \RequirePackage{microtype}
@@ -85,5 +95,5 @@
 }
 
 
-% vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_de spell:
+% vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=en_uk spell:
 

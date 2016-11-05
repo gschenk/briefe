@@ -1,6 +1,19 @@
 \NeedsTeXFormat{LaTeX2e} 
 \ProvidesPackage{mydefs}[2016/10/31 defines some macros for scrltr2 letters]
 
+% source code is utf8 encoded
+\PassOptionsToPackage{utf8}{inputenc}
+\RequirePackage{inputenc}
+
+% correct encoding to allow accented characters in output
+\PassOptionsToPackage{T1}{fontenc}
+\RequirePackage{fontenc}
+
+
+% lorem ipsum
+\usepackage{lipsum}
+
+
 \providecommand{\subject}[1]{%
   \setkomavar{subject}{#1}
 }
@@ -15,5 +28,14 @@
 %  as stored in recipients.adr file
 \newcommand{\Recipient}{dummy}
 
-% vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_de spell:
+
+%% load private data
+\LoadLetterOptions{private/sender}
+
+\RequirePackage{scraddr}
+\InputAddressFile{private/recipients}
+
+
+
+% vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=en_uk spell:
 

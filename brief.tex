@@ -1,58 +1,14 @@
-%% language selection
-\newif\ifgerman
-% if for later mutli lang conditionals, defaults to english if false
-\germantrue
-
-%% class call
 \documentclass[a4paper]{scrlttr2}
 
-\LoadLetterOptions{DINmtext} %mtext}
-
-%% load packages
-
-% correct encoding to allow accented characters in output
-\usepackage[T1]{fontenc}
-
-% source code is utf8 encoded
-\usepackage[utf8]{inputenc}
-
-% hyphenation patterns
-\ifgerman
-  \PassOptionsToPackage{german}{babel}
-\else
-  \PassOptionsToPackage{english}{babel}
-\fi
-\usepackage{babel}
-
-
-% lorem ipsum
-\usepackage{lipsum}
-
-% own definitions
+%% own definitions, package calls
 \usepackage{mydefs}
 
-% my style choices
-\ifgerman
-  \PassOptionsToPackage{german}{mystyle}
-\else
-  \PassOptionsToPackage{english}{mystyle}
-\fi
-\usepackage{mystyle}
+%% layout and style choices
+% language choice: english or german
+\usepackage[german]{mystyle}
 
 
-%% some settings
-
-
-% load private data
-\LoadLetterOptions{private/sender}
-
-%\input{private/recipients.adr}
-
-\usepackage{scraddr}
-\InputAddressFile{private/recipients}
-
-
-%% Define the Recipient here!
+%% Define the Recipient
 %  The handle is the last argument
 %  of the \addrentry in private/recipients.adr
 \renewcommand{\Recipient}{HASE}
@@ -60,7 +16,7 @@
 %% body of the letter
 \begin{document}
   \begin{letter}{%
-    \AutoRecipientAddress{\Recipient}%
+    \AutoRecipientAddress{\Recipient}
     }
     \title{%
       Lorem Ipsum

@@ -24,7 +24,7 @@ else
 endif
 
 
-.PHONY: all clean cleaner view
+.PHONY: all clean cleaner view newrec
 
 all: text
 
@@ -41,6 +41,8 @@ cleaner: clean
 clean:
 	rm -f *.dvi *.aux *.out 
 
+newrec:
+	python addrEntry.py
 
 view:
 	test -e $(TARGET) && $(VIEWER) $(VFLAGS) $(TARGET) 2> /dev/null &

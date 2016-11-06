@@ -6,3 +6,7 @@ stored in the 'private' directory.
 Care must be taken not to make
 branches where these were filled
 with private data public.
+
+
+The repo of python scripts can be found on github:
+git@github.com:gschenk/address-stuff.git

@@ -3,7 +3,7 @@
 # address entries without extension.
 
 from yaml import load, YAMLError
-from sys import argv
+import sys
 
 # path to the configuration file
 cfgfile = 'address.cfg'
@@ -16,6 +16,10 @@ def get_path_filename(handle):
     path = yamlPath.strip('/').strip()
     return path + '/' + handle + yamlExtension
 
+def eprint(argument):
+    """ print to stderr """
+    sys.stderr.write(argument)
+
 # MAIN
 
 # read the configuration file, wherin paths, data
@@ -26,26 +30,33 @@ with open(cfgfile) as f:
 
 
 # get commandline argument
-for idx, arg in enumerate(argv[1:]):
+for idx, arg in enumerate(sys.argv[1:]):
     if idx == 0:
         handle = arg
     if idx == 1:
-        print("Only the first argument is considered. "
+        eprint("Only the first argument is considered. "
              + "Here I dump the rest. "
              + "After that I shall exit disgracefully."
              )
     if idx >= 1:
-        print(arg, "\n")
+        eprint(arg + "\n")
 
 # Do exit disgracefully.
+if 'idx' not in locals():
+    eprint("An argument is required, "
+          + "it should specify the handle of "
+          + " the address entry.")
+    eprint("Oh dear, is this the end? Yes, indeed.")
+    exit(5)
+
 if idx > 0:
-    print("I told you so!")
+    eprint("I told you so!")
     exit(1)
 
 
 # check for and strip extensions
 if yamlExtension in handle:
-    print("Please avoid extensions ("
+    eprint("Please avoid extensions ("
           + yamlExtension
           + ") in the handle. "
           + "I shall proceed to strip it now."
@@ -56,7 +67,7 @@ if yamlExtension in handle:
 forbidden = ['/','\\','*']
 for c in forbidden:
     if c in handle:
-        print("This character cannot be in "
+        eprint("This character cannot be in "
               + "a valid handle: "
               + c
               + "\nAlas, how far I came, "
@@ -71,7 +82,7 @@ with open(infile, 'r') as fp:
     try:
         entries = load(fp)
     except YAMLError as exc:
-        print(exc)
+        eprint(exc)
         exit(3)
 
 

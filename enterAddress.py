@@ -1,5 +1,9 @@
-import json
+from yaml import dump
 import os
+
+
+# path to the configuration file
+cfgfile = 'address.cfg'
 
 
 def addr_lang(key):
@@ -35,7 +39,7 @@ def addr_entry(key):
 
     # remove forbidden strings
     trans_tab = dict.fromkeys(
-        map(ord, '.\"\'!@#$\\\/'), None
+        map(ord, '\:.\"\'!@#$\\\/'), None
     )
 
     line = line.translate(trans_tab)
@@ -96,8 +100,8 @@ def query_acceptance(trial):
 
 def get_path_filename(handle):
     """ cleans path, combines it"""
-    path = jsonPath.strip('/').strip()
-    return path + '/' + handle + '.json'
+    path = yamlPath.strip('/').strip()
+    return path + '/' + handle + yamlExtension
 
 
 def check_handle(handle):
@@ -107,28 +111,12 @@ def check_handle(handle):
 
 # MAIN
 
-jsonPath = './private/'
-jsonExtension = '.json'
+# read the configuration file, wherin paths, data
+# structures and keys for the yaml output are defined.
 
-# define strings for json keys
-entries = {
-    "givenName": "",
-    "familyName": "",
-    "nameLanguage": "",
-    "theAddress": {
-        "moreNames": "",
-        "academicDegrees": "",
-        "academicDegreeInSalutation": "",
-        "styleInSalutation": "",
-        "companyName": "",
-        "houseNumber": "",
-        "street": "",
-        "city": "",
-        "postalCode": "",
-        "postBox": "",
-        "country": "",
-    }
-}
+with open(cfgfile) as f:
+        code = compile(f.read(), cfgfile, 'exec')
+        exec(code)
 
 
 # get necessary entries
@@ -160,6 +148,7 @@ for key in dict.keys(entries['theAddress']):
 for key in empty_keys:
     del entries['theAddress'][key]
 
+# output to yaml
 outfile = get_path_filename(handle)
 with open(outfile, 'w') as fp:
-        json.dump(entries, fp, indent=4, sort_keys=True)
+        dump(entries, fp, default_flow_style=False)

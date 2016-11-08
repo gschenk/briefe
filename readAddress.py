@@ -27,16 +27,41 @@ def eprint(argument):
 def setkomavar(var, arg):
     # a latex KOMA class way to assign variables
     texstring = (r"\setkomavar{"
-                 + var + r"}{" + arg + r"}")
+                 + var + "}{%\n    " + arg
+                 + "%\n    }")
 
     return texstring
 
 
-def newcommand(cmd, arg):
+def renewcommand(cmd, arg):
     # a latex macro containing arg
-    texstring = (r"\newcommand{"
-                 + cmd + r"}[0]{" + arg + "}")
+    texstring = (r"\renewcommand{"
+                 + cmd + "}[0]{%\n    "
+                 + arg + "%\n    }")
     return texstring
+
+
+def company(adict):
+    key = "companyName"
+    if key in adict:
+        return r"\\" + "%\n    " + adict[key]
+    else:
+        return ""
+
+
+def get_entry(key, adict):
+    if key in adict:
+        return adict[key]
+    else:
+        return ""
+
+
+def get_country(adict):
+    key = "country"
+    if key in adict:
+        return r"\\" + "%\n    " + adict[key]
+    else:
+        return ""
 
 
 def degrees(adict):
@@ -54,7 +79,20 @@ def degrees(adict):
         return ""
 
 
-def style_in_salutation(adict):
+def degree_in_salut(adict):
+    key = "academicDegreeInSalutation"
+    if key in adict:
+        degree = adict[key] + " %\n    "
+        if degree.endswith('.'):
+            degree = degree + r'\ '
+    elif degrees(adict):
+        degree = degrees(adict)
+    else:
+        degree = ""
+    return degree
+
+
+def style_in_salut(adict):
     # check if there is a salutation and return it
     if "styleInSalutation" in adict:
         return adict["styleInSalutation"]
@@ -159,8 +197,8 @@ toname = ""
 if is_german:
     # the name needs to contain the 'Anrede'
     toname = (toname
-              + style_in_salutation(entries["theAddress"])
-              + r"\\")
+              + style_in_salut(entries["theAddress"])
+              + r"\\" + "%\n    ")
     # and all academic degrees Dr and up
     toname = toname + degrees(entries["theAddress"])
 
@@ -174,6 +212,58 @@ if is_chinese:
 else:
     toname = toname + g_name + " " + f_name
 
-# if the addresse is an actual person
+# append the company
+toname = toname + company(entries["theAddress"])
+# often the company ought to go before the name,
+# the user may change this in the actual tex output
 
-print(setkomavar('toname', toname))
+
+# the postal address: toaddress
+
+def germanaddress(adict):
+    """ put together an address using german style """
+    return (get_entry("street", adict) + " "
+            + get_entry("houseNumber", adict)
+            + r"\\" + "%\n    "
+            + get_entry("postalCode", adict)
+            + " "
+            + get_entry("city", adict)
+            + get_country(adict)
+            )
+
+if is_german:
+    toaddress = germanaddress(entries["theAddress"])
+else:
+    toaddress = germanaddress(entries["theAddress"])
+    eprint("Only German address conventions have been implemented yet.")
+
+
+# print to stdout latex statements to assign string
+for thevar in [toname, toaddress]:
+    print(setkomavar('toname', thevar))
+
+
+# creating the automatic salutation line
+if is_german:
+    style = style_in_salut(entries["theAddress"])
+    if style:
+        # the it is a real person
+        if style == "Herr":
+            salutation = "Sehr geehrter Herr "
+        elif style == "Frau":
+            salutation = "Sehr geehrte Frau "
+        else:
+            salutation = ""
+    else:
+        salutation = ""
+
+    if salutation:
+        salutation = (salutation
+                      + degree_in_salut(entries["theAddress"])
+                      + f_name
+                      )
+    else:
+        salutation = "Sehr geehrte Damen und Herren"
+
+# print the latex statement
+print(renewcommand(r"\autosalutation", salutation))

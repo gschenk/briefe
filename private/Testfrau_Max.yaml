@@ -1,0 +1,13 @@
+familyName: Testfrau
+givenName: Max
+nameLanguage: de
+theAddress:
+  academicDegreeInSalutation: Professor
+  academicDegrees: Prof. Dr.
+  city: Musterstadt
+  country: Testland
+  houseNumber: '10'
+  postalCode: '1234'
+  street: Testweg
+  styleInSalutation: Frau
+  companyName: "Testwerke AG"

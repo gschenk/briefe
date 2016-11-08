@@ -8,9 +8,6 @@ import sys
 # path to the configuration file
 cfgfile = 'address.cfg'
 
-# temporary asgt
-handle = 'test_test'
-
 
 def get_path_filename(handle):
     """ cleans path, combines it"""
@@ -113,6 +110,13 @@ def strip_extension(handle):
         return handle
 
 
+def strip_comments(handle):
+    trans_tab = dict.fromkeys(
+        map(ord, r"% "), None)
+    return handle.translate(trans_tab)
+
+
+
 def check_if_valid(s):
     """ warn and return false if handle is invalid """
     forbidden = r"@%?\/*"
@@ -139,7 +143,7 @@ yamlExtension = config['extension']
 yamlPath = config['path']
 
 try:
-    handle = (sys.argv[1])
+    sys.argv[1]
 except:
     eprint("An argument is required, "
            + "it should specify the handle of "
@@ -147,16 +151,14 @@ except:
     eprint("\nOh dear, is this the end? Yes, indeed.")
     exit(4)
 
-if len(sys.argv) > 2:
-    eprint("Only the first argument is considered. "
-           + "Here I dump the rest:"
-           + str(sys.argv[2:])
-           + "\nAfter that I shall exit disgracefully.")
-    exit(2)
-
+# join all arguments to a single string
+handle = "".join(sys.argv[1:])
 
 # check for and strip extensions
 handle = strip_extension(handle)
+
+# strip laTeX commments and whitespace, anywhere in str
+handle = strip_comments(handle)
 
 # some chars must not be in a valid handle
 if not check_if_valid(handle):

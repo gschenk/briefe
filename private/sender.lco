@@ -7,21 +7,20 @@
 
 %\setkomavar
 \setkomavar{fromname}{%
-  kleiner Tiger
+  Eric Praline%
 }
 
 % return address
 \setkomavar{fromaddress}{%
-  Das Haus\\
-  am grossen Fluss
+  White City, W12 7RJ%
 }
 
 \setkomavar{fromphone}{%
-  01234
+  1234%
 }
 
 \setkomavar{fromemail}{
-  tiger@flaschenpost.invalid
+  praline@python.invalid
 }
 
 % add some addresses to a right hand box in the header

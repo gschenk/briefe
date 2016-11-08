@@ -47,7 +47,7 @@ $(RECIPIENT):$(SRC) $(ADSCR)
 	python $(ADSCR) `head -n 1 $<` > $@
 
 cleaner: clean
-	rm -f *.pdf *.log
+	rm -f *.pdf *.log rm private/recipient.lco
 
 clean:
 	rm -f *.dvi *.aux *.out

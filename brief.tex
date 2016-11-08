@@ -12,13 +12,10 @@
 \usepackage[german]{mystyle}
 
 
-%% Define the Recipient
-%  The handle is the last argument
-%  of the \addrentry in private/recipients.adr
-%\renewcommand{\Recipient}{HASE}
-
 %% body of the letter
 \begin{document}
+  % modify address in private/recipient.lco or through
+  % the addressee's yaml file
   \begin{letter}{}
     \title{%
       Lorem Ipsum
@@ -27,7 +24,7 @@
       Dolor Sit Amet
     }
     \opening{%
-      \autosalutation
+      \autosalutation % modify in private/recipient.lco
     }
     \lipsum[1]  %lorem ipsum
     \closing{%

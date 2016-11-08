@@ -263,9 +263,10 @@ if is_german:
         salutation = (salutation
                       + degree_in_salut(entries["theAddress"])
                       + f_name
+                      + ","
                       )
     else:
-        salutation = "Sehr geehrte Damen und Herren"
+        salutation = "Sehr geehrte Damen und Herren,"
 
 # print the latex statement
 print(newcommand(r"\autosalutation", salutation))

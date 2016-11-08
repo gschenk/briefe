@@ -27,8 +27,7 @@ def eprint(argument):
 def setkomavar(var, arg):
     # a latex KOMA class way to assign variables
     texstring = (r"\setkomavar{"
-                 + var + r"}{" + arg + r"}"
-                )
+                 + var + r"}{" + arg + r"}")
 
     return texstring
 
@@ -36,16 +35,31 @@ def setkomavar(var, arg):
 def newcommand(cmd, arg):
     # a latex macro containing arg
     texstring = (r"\newcommand{"
-                 + cmd + r"}[0]{" + arg + "}"
-                )
+                 + cmd + r"}[0]{" + arg + "}")
     return texstring
 
 
-def no_white_trail(thedict):
-    # removes trailing whitespace from dict values
-    for key, val in dict.items(thedict):
-        if isinstance(val, str) and val.endswith(' '):
-            thedict[key] = val.strip()
+def degrees(adict):
+    if "academicDegrees" in adict:
+        degree = adict["academicDegrees"]
+        # which might need some formatting
+        if degree[-2:] == 'Dr':
+            degree = degree + '.'
+        if degree.endswith('.'):
+            degree = degree + ' '
+        # spaces in TeX need protection
+        # after an abbr. point
+        return degree.replace(". ", r".\ ")
+    else:
+        return ""
+
+
+def style_in_salutation(adict):
+    # check if there is a salutation and return it
+    if "styleInSalutation" in adict:
+        return adict["styleInSalutation"]
+    else:
+        return ""
 
 
 def strip_extension(handle):
@@ -119,10 +133,6 @@ with open(infile, 'r') as fp:
         eprint(exc)
         exit(3)
 
-# remove trailing whitespace
-# apparently not needed, yaml takes care of it
-#no_white_trail(entries)
-#no_white_trail(entries["theAddress"])
 
 # the script needs to learn whether German,
 # English, or another language is used
@@ -148,39 +158,21 @@ else:
 toname = ""
 if is_german:
     # the name needs to contain the 'Anrede'
-    if "styleInSalutation" in entries["theAddress"]:
-        toname = ( toname +
-            entries["theAddress"]["styleInSalutation"]
-            + r"\\"
-            )
-    # and some academic degrees
-    if "academicDegrees" in entries["theAddress"]:
-        degree = entries["theAddress"]["academicDegrees"]
-        # which might need some formatting
-        if degree[-2:] == 'Dr':
-            degree = degree + '.'
-        if degree.endswith('.'):
-            degree = degree + ' '
-        degree = degree.replace(". ",r".\ ")
+    toname = (toname
+              + style_in_salutation(entries["theAddress"])
+              + r"\\")
+    # and all academic degrees Dr and up
+    toname = toname + degrees(entries["theAddress"])
 
-        # but is eventually added
-        toname = toname + degree
+# these strings are often used, variables:
+f_name = entries["familyName"]
+g_name = entries["givenName"]
 
-# at last something that applies always, the name
+# correct name order in Chinese
 if is_chinese:
-    toname = (toname
-              + entries["familyName"]
-              + " "
-              + entries["givenName"]
-             )
+    toname = toname + f_name + " " + g_name
 else:
-    toname = (toname
-              + entries["givenName"]
-              + " "
-              + entries["familyName"]
-             )
-#entries["theAddress"]["givenName"]
-#entries["theAddress"]["familyName"]
+    toname = toname + g_name + " " + f_name
 
 # if the addresse is an actual person
 

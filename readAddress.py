@@ -30,9 +30,9 @@ def setkomavar(var, arg):
     return texstring
 
 
-def renewcommand(cmd, arg):
+def newcommand(cmd, arg):
     # a latex macro containing arg
-    texstring = (r"\renewcommand{"
+    texstring = (r"\newcommand{"
                  + cmd + "}[0]{%\n    "
                  + arg + "%\n    }")
     return texstring
@@ -241,8 +241,8 @@ else:
 
 
 # print to stdout latex statements to assign string
-for thevar in [toname, toaddress]:
-    print(setkomavar('toname', thevar))
+print(setkomavar('toname', toname))
+print(setkomavar('toaddress', toaddress))
 
 
 # creating the automatic salutation line
@@ -268,4 +268,4 @@ if is_german:
         salutation = "Sehr geehrte Damen und Herren"
 
 # print the latex statement
-print(renewcommand(r"\autosalutation", salutation))
+print(newcommand(r"\autosalutation", salutation))

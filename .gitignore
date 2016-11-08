@@ -3,4 +3,5 @@
 *.aux
 *.log
 *.out
-private/*.json
+private/*.yaml
+private/recipient.lco

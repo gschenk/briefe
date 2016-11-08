@@ -15,13 +15,11 @@
 %% Define the Recipient
 %  The handle is the last argument
 %  of the \addrentry in private/recipients.adr
-\renewcommand{\Recipient}{HASE}
+%\renewcommand{\Recipient}{HASE}
 
 %% body of the letter
 \begin{document}
-  \begin{letter}{%
-      \AutoRecipientAddress{\Recipient}%
-    }
+  \begin{letter}{}
     \title{%
       Lorem Ipsum
     }
@@ -29,7 +27,7 @@
       Dolor Sit Amet
     }
     \opening{%
-      \AutoOpening{\Recipient}
+      \autosalutation
     }
     \lipsum[1]  %lorem ipsum
     \closing{%

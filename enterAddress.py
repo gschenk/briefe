@@ -1,4 +1,4 @@
-from yaml import dump
+from yaml import dump, load
 import os
 
 
@@ -31,8 +31,8 @@ def addr_entry(key):
         'please enter ' + key + ': '
     )
 
-    # get rid of trailing whitespace, abbr points
-    line = rawline.rstrip('.').strip()
+    # get rid of trailing whitespace
+    line = rawline.strip()
 
     # replace tabs
     line = line.replace('\t', ' ')
@@ -100,8 +100,8 @@ def query_acceptance(trial):
 
 def get_path_filename(handle):
     """ cleans path, combines it"""
-    path = yamlPath.strip('/').strip()
-    return path + '/' + handle + yamlExtension
+    path = config['path'].strip('/').strip()
+    return path + '/' + handle + config['extension']
 
 
 def check_handle(handle):
@@ -115,8 +115,9 @@ def check_handle(handle):
 # structures and keys for the yaml output are defined.
 
 with open(cfgfile) as f:
-        code = compile(f.read(), cfgfile, 'exec')
-        exec(code)
+        config = load(f)
+
+entries = config['entries']
 
 
 # get necessary entries

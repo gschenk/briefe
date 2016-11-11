@@ -72,13 +72,14 @@ def degreesAfter(adict):
 
 
 def degrees(adict):
-    if "academicDegrees" in adict:
-        degree = adict["academicDegrees"]
+    key = "academicDegrees"
+    if key in adict:
+        degree = adict[key]
         # which might need some formatting
         if degree[-2:] == 'Dr':
-            degree = degree + '.'
+            degree += '.'
         if degree.endswith('.'):
-            degree = degree + ' '
+            degree += ' '
         # spaces in TeX need protection
         # after an abbr. point
         return degree.replace(". ", r".\ ")
@@ -91,7 +92,7 @@ def degree_in_salut(adict):
     if key in adict:
         degree = adict[key] + " %\n    "
         if degree.endswith('.'):
-            degree = degree + r'\ '
+            degree += r'\ '
     elif degrees(adict):
         degree = degrees(adict)
     else:
@@ -101,8 +102,9 @@ def degree_in_salut(adict):
 
 def style_in_salut(adict):
     # check if there is a salutation and return it
-    if "styleInSalutation" in adict:
-        return adict["styleInSalutation"]
+    key = "styleInSalutation"
+    if key in adict:
+        return adict[key]
     else:
         return ""
 
@@ -124,7 +126,6 @@ def strip_comments(handle):
     trans_tab = dict.fromkeys(
         map(ord, r"% "), None)
     return handle.translate(trans_tab)
-
 
 
 def check_if_valid(s):
@@ -208,11 +209,10 @@ else:
 toname = ""
 if is_german:
     # the name needs to contain the 'Anrede'
-    toname = (toname
-              + style_in_salut(entries["theAddress"])
-              + r"\\" + "%\n    ")
+    toname += (style_in_salut(entries["theAddress"])
+               + r"\\" + "%\n    ")
     # and all academic degrees Dr and up
-    toname = toname + degrees(entries["theAddress"])
+    toname += degrees(entries["theAddress"])
 
 # these strings are often used, variables:
 f_name = entries["familyName"]
@@ -220,17 +220,17 @@ g_name = entries["givenName"]
 
 # correct name order in Chinese
 if is_chinese:
-    toname = toname + f_name + " " + g_name
+    toname += f_name + " " + g_name
 else:
-    toname = toname + g_name + " " + f_name
+    toname += g_name + " " + f_name
 
 # append English degree forms
 if is_german:
-    toname = toname + degreesAfter(entries["theAddress"])
+    toname += degreesAfter(entries["theAddress"])
 
 
 # append the company
-toname = toname + company(entries["theAddress"])
+toname += company(entries["theAddress"])
 # often the company ought to go before the name,
 # the user may change this in the actual tex output
 
@@ -275,11 +275,8 @@ if is_german:
         salutation = ""
 
     if salutation:
-        salutation = (salutation
-                      + degree_in_salut(entries["theAddress"])
-                      + f_name
-                      + ","
-                      )
+        salutation += (degree_in_salut(entries["theAddress"])
+                       + f_name + ",")
     else:
         salutation = "Sehr geehrte Damen und Herren,"
 

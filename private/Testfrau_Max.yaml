@@ -4,6 +4,7 @@ nameLanguage: de
 theAddress:
   academicDegreeInSalutation: Professor
   academicDegrees: Prof. Dr.
+  academicDegreesAfterName: BSc
   city: Musterstadt
   country: Testland
   houseNumber: '10'

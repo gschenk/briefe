@@ -61,6 +61,16 @@ def get_country(adict):
         return ""
 
 
+def degreesAfter(adict):
+    key = "academicDegreesAfterName"
+    if key in adict:
+        if adict[key]:
+            degree = adict[key]
+            return ", " + degree
+        else:
+            return ""
+
+
 def degrees(adict):
     if "academicDegrees" in adict:
         degree = adict["academicDegrees"]
@@ -213,6 +223,11 @@ if is_chinese:
     toname = toname + f_name + " " + g_name
 else:
     toname = toname + g_name + " " + f_name
+
+# append English degree forms
+if is_german:
+    toname = toname + degreesAfter(entries["theAddress"])
+
 
 # append the company
 toname = toname + company(entries["theAddress"])

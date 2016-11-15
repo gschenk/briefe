@@ -24,16 +24,19 @@
   \setkomavar{title}{#1}
 }
 
-%% provides variable for recipient handle
-%  as stored in recipients.adr file
-\newcommand{\Recipient}{dummy}
+
+% remove \\ from its argument text
+\newcommand\doSingleLine[1]{%
+  \let\normalnewline=\\
+  \let\\=\relax
+  #1%
+  \let\\=\normalnewline
+}
 
 
 %% load private data
 \LoadLetterOptions{private/sender}
 \LoadLetterOptions{private/recipient}
-
-
 
 % vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=en_uk spell:
 

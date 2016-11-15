@@ -18,6 +18,8 @@ SRC =$(addsuffix .tex,$(T))
 
 OBJ = $(SRC)
 OBJ+= private/sender.lco
+OBJ+= DIN5008A.lco
+
 
 # tex parser
 TEX= pdflatex

@@ -12,7 +12,8 @@
 
 % return address
 \setkomavar{fromaddress}{%
-  White City, W12 7RJ%
+  White City, W12 7RJ,\\
+  United Kingdom
 }
 
 \setkomavar{fromphone}{%
@@ -23,10 +24,21 @@
   praline@python.invalid
 }
 
-% add some addresses to a right hand box in the header
-\setkomavar{location}{%
-  \usekomavar*{fromphone}\usekomavar{fromphone}\\
-  \usekomavar*{fromemail}\usekomavar{fromemail}
+% the backaddress might break lines,
+% in doubt, construct it yourself
+\setkomavar{backaddressseparator}{$\cdot$}
+\setkomavar{backaddress}{%
+  \usekomavar{fromname}%
+  \usekomavar{backaddressseparator}%
+  \doSingleLine{%
+    \usekomavar{fromaddress}
+  }
 }
+
+% add some addresses to a right hand box in the header
+%\setkomavar{location}{%
+%  \usekomavar*{fromphone}\usekomavar{fromphone}\\
+%  \usekomavar*{fromemail}\usekomavar{fromemail}
+%}
 
 % vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_de spell:

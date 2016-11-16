@@ -39,7 +39,7 @@ def addr_entry(key):
 
     # remove forbidden strings
     trans_tab = dict.fromkeys(
-        map(ord, '\:.\"\'!@#$\\\/'), None
+        map(ord, '\:\"\'!@#$\\\/'), None
     )
 
     line = line.translate(trans_tab)

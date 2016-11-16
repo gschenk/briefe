@@ -8,7 +8,7 @@ RECIPIENT=private/recipient.lco
 
 # the python script that generates from yaml address
 # entries latex KOMA variables for the recipient
-ADSCR = readAddress.py
+ADSCR = enterAddress.py
 
 # configuration
 STY = mydefs.sty mystyle.sty

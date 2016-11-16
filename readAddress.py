@@ -226,7 +226,8 @@ else:
 
 # append English degree forms
 if is_german:
-    toname += degreesAfter(entries["theAddress"])
+    if degreesAfter(entries["theAddress"]):
+        toname += degreesAfter(entries["theAddress"])
 
 
 # append the company

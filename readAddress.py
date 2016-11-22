@@ -249,6 +249,7 @@ def germanaddress(adict):
             + get_country(adict)
             )
 
+
 if is_german:
     toaddress = germanaddress(entries["theAddress"])
 else:
@@ -280,6 +281,18 @@ if is_german:
                        + f_name + ",")
     else:
         salutation = "Sehr geehrte Damen und Herren,"
+else:  # assumes an English salutation
+    style = style_in_salut(entries["theAddress"])
+    degree = degrees(entries["theAddress"])
+    if degree == "professor":
+        salutation = "Dear professor " + f_name + ","
+
+    elif style:
+        salutation = ("Dear " + style
+                      + " " + f_name + ",")
+    else:
+        salutation = "To whom it may concern,"
+
 
 # print the latex statement
 print(newcommand(r"\autosalutation", salutation))

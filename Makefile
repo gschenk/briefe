@@ -8,7 +8,7 @@ RECIPIENT=private/recipient.lco
 
 # the python script that generates from yaml address
 # entries latex KOMA variables for the recipient
-ADSCR = enterAddress.py
+ADSCR = readAddress.py
 
 # configuration
 STY = mydefs.sty mystyle.sty
@@ -55,7 +55,7 @@ clean:
 	rm -f *.dvi *.aux *.out
 
 newrec:
-	python addrEntry.py
+	python enterAddress.py
 
 view:
 	test -e $(TARGET) && $(VIEWER) $(VFLAGS) $(TARGET) 2> /dev/null &

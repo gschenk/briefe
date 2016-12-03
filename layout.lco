@@ -1,6 +1,7 @@
 \ProvidesFile{layout.lco}[2016/03/12 defines KOMA options for my letters]
 
 %% New KOMA Variables
+\newkomavar{opening}
 
 %% Layout Changes
 

@@ -295,4 +295,4 @@ else:  # assumes an English salutation
 
 
 # print the latex statement
-print(newcommand(r"\autosalutation", salutation))
+print(setkomavar("opening", salutation))

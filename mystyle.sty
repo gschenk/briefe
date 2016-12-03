@@ -43,6 +43,11 @@
 \RequirePackage{isodate}
 \isodate
 
+% several documents are still one Anlage, no pl here
+\ifgerman
+  \setkomavar{enclseparator}[{\bfseries Anlage:} ]{}
+\fi
+
 
 
 % vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=en_uk spell:

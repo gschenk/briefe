@@ -225,9 +225,6 @@ print(setkomavar("tofullname", fullname))
 
 toname = ""
 if is_german:
-    # the name needs to contain the 'Anrede'
-    toname += (style_in_salut(entries["theAddress"])
-               + r"\\" + "%\n    ")
     # and all academic degrees Dr and up
     toname += degrees(entries["theAddress"])
 
@@ -240,6 +237,18 @@ toname += fullname
 if is_german:
     if degreesAfter(entries["theAddress"]):
         toname += degreesAfter(entries["theAddress"])
+
+# put the correct salutation in front
+if is_german:
+    # in case of long names break line after 'anrede'
+    if len(toname) > 25:
+        toname = r"\\" + "\n" + toname
+    else:
+        toname = " " + toname
+
+    # the name needs to contain the 'Anrede'
+    toname = (style_in_salut(entries["theAddress"])
+              + toname)
 
 
 # append the company

@@ -240,6 +240,12 @@ if is_german:
 
 # put the correct salutation in front
 if is_german:
+    style_in_address = style_in_salut(entries["theAddress"])
+
+    # old-fashioned grammar in address
+    if style_in_address == "Herr":
+        style_in_address += "n"
+
     # in case of long names break line after 'anrede'
     if len(toname) > 25:
         toname = r"\\" + "\n" + toname
@@ -247,8 +253,7 @@ if is_german:
         toname = " " + toname
 
     # the name needs to contain the 'Anrede'
-    toname = (style_in_salut(entries["theAddress"])
-              + toname)
+    toname = style_in_address + toname
 
 
 # append the company

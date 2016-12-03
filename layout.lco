@@ -9,5 +9,21 @@
 \setkomafont{title}{\sffamily\scshape}
 
 
+
+% DIN5008A.lco appears to break the backadrress
+% this tries to put one together manually
+%
+% It is a bit fragile, check and fix as needed
+%
+\setkomavar{backaddressseparator}{$\cdot$}
+\setkomavar{backaddress}{%
+  \usekomavar{fromname}%
+  \usekomavar{backaddressseparator}%
+  \doSingleLine{%
+    \usekomavar{fromaddress}
+  }
+}
+
+
 % vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=en_uk spell:
 

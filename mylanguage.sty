@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e} 
-\ProvidesPackage{mystyle}[2016/11/01 defines some layout choices for sclttr2]
+\ProvidesPackage{mylanguage}[2016/11/01 defines some language options]
 
 \RequirePackage{ifthen}
 
@@ -28,25 +28,18 @@
 \RequirePackage{libertinust1math}
 
 
-% sans serif subject and title
-\setkomafont{subject}{\sffamily\bfseries}
-\setkomafont{title}{\sffamily\scshape}
-
 % iso date format
 % finer control of date format
 \ifgerman
   \PassOptionsToPackage{german}{isodate}
+  \LoadLetterOptions{german}
 \else
   \PassOptionsToPackage{english}{isodate}
+  \LoadLetterOptions{english}
 \fi
 
 \RequirePackage{isodate}
 \isodate
-
-% several documents are still one Anlage, no pl here
-\ifgerman
-  \setkomavar{enclseparator}[{\bfseries Anlage:} ]{}
-\fi
 
 
 

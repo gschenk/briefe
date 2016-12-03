@@ -11,14 +11,17 @@ RECIPIENT=private/recipient.lco
 ADSCR = readAddress.py
 
 # configuration
-STY = mydefs.sty mystyle.sty
+STY = mydefs.sty mylanguage.sty
+
+LCO = layout.lco german.lco english.lco DIN5008A.lco
 
 # objects
 SRC =$(addsuffix .tex,$(T))
 
 OBJ = $(SRC)
 OBJ+= private/sender.lco
-OBJ+= DIN5008A.lco
+OBJ+= $(RECIPIENT)
+OBJ+= $(LCO)
 
 
 # tex parser
@@ -41,7 +44,7 @@ all: text
 
 text:$(TARGET)
 
-$(TARGET):$(OBJ) $(STY) $(RECIPIENT)
+$(TARGET):$(OBJ) $(STY)
 	$(TEX) -draftmode $(T)
 	$(TEX) $(T)
 

@@ -2,6 +2,9 @@
 
 %% New KOMA Variables
 \newkomavar{opening}
+\newkomavar{tofamname}
+\newkomavar{togivenname}
+\newkomavar{tofullname}
 
 %% Layout Changes
 

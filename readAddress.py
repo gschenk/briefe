@@ -204,7 +204,24 @@ else:
     is_chinese = False
 
 
+# put together the name of the recipient
+
+f_name = entries["familyName"]
+g_name = entries["givenName"]
+
+# correct name order in Chinese
+if is_chinese:
+    fullname = f_name + " " + g_name
+else:
+    fullname = g_name + " " + f_name
 # komavar toname, complete name of addresse
+
+# just the names, these might be useful at times,
+# but are not used in the letter by default
+print(setkomavar("tofamname", f_name))
+print(setkomavar("togivenname", g_name))
+print(setkomavar("tofullname", fullname))
+
 
 toname = ""
 if is_german:
@@ -214,15 +231,10 @@ if is_german:
     # and all academic degrees Dr and up
     toname += degrees(entries["theAddress"])
 
-# these strings are often used, variables:
-f_name = entries["familyName"]
-g_name = entries["givenName"]
 
-# correct name order in Chinese
-if is_chinese:
-    toname += f_name + " " + g_name
-else:
-    toname += g_name + " " + f_name
+# append the full name
+toname += fullname
+
 
 # append English degree forms
 if is_german:

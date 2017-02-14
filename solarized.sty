@@ -1,0 +1,72 @@
+%defines a colour theme for easy screen reading
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{solarized}
+  [2012/04/03 own frequently used definitons]
+\RequirePackage{xcolor,everysel,etoolbox,sectsty,floatrow,caption}
+
+\definecolor{base03}{HTML}{002B36}
+\definecolor{base02}{HTML}{073642}
+\definecolor{base01}{HTML}{586E75}
+\definecolor{base00}{HTML}{657B83}
+\definecolor{base0}{HTML}{839496}
+\definecolor{base1}{HTML}{93A1A1}
+\definecolor{base2}{HTML}{EEE8D5}
+\definecolor{base3}{HTML}{FDF6E3}
+\definecolor{yellow}{HTML}{B58900}
+\definecolor{orange}{HTML}{CB4B16}
+\definecolor{red}{HTML}{DC322F}
+\definecolor{magenta}{HTML}{D33682}
+\definecolor{violet}{HTML}{6C71C4}
+\definecolor{blue}{HTML}{268BD2}
+\definecolor{cyan}{HTML}{2AA198}
+\definecolor{green}{HTML}{859900}
+
+
+\let\reftagform@=\tagform@
+
+%light theme
+\ifsoldark
+  \pagecolor{base03}
+  \color{base0}
+  \AtBeginEnvironment{itemize}{\color{base01}}
+  \AtBeginEnvironment{equation}{\color{yellow}}
+  \everymath{\color{yellow}}
+  \DeclareColorBox{shaded}{\colorbox{base02}}
+  \floatsetup{%
+    framestyle=colorbox,%
+    colorframeset=shaded,%
+    framefit=yes,%
+    heightadjust=all,%
+    framearound=all%
+  }
+  \DeclareCaptionFont{label}{\color{cyan}}
+  \DeclareCaptionFont{text}{\color{base1}}
+  \captionsetup{%
+    labelfont=label,%
+    textfont=text%
+  }
+  \def\tagform@#1{\maketag@@@{%
+    (\ignorespaces\textcolor{base0}{#1}%
+    \unskip\@@italiccorr)
+  }}
+\else
+  \pagecolor{base3}
+  \color{base00}
+  \AtBeginEnvironment{itemize}{\color{base1}}
+  \AtBeginEnvironment{equation}{\color{orange}}
+  \everymath{\color{orange}}
+  \sectionfont{\color{base01}}
+  \def\tagform@#1{\maketag@@@{%
+    (\ignorespaces\textcolor{base00}{#1}%
+    \unskip\@@italiccorr)
+  }}
+\fi
+
+\renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
+%
+
+%common
+
+
+
+% vim: ai syntax=tex expandtab shiftwidth=2 softtabstop=2 :

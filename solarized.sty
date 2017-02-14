@@ -2,27 +2,31 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \ProvidesPackage{solarized}
   [2012/04/03 own frequently used definitons]
-\RequirePackage{xcolor,everysel,etoolbox,floatrow,caption,ifthen}
+\RequirePackage{xcolor,etoolbox,ifthen}
 
+\newif\ifsolarized
 \newif\ifsoldark
-
 \newif\ifsollight
 
 \DeclareOption{dark}{%
+  \solarizedtrue
   \soldarktrue
   \sollightfalse
 }
 
 \DeclareOption{light}{%
+  \solarizedtrue
   \sollighttrue
   \soldarkfalse
 }
 
 \DeclareOption{no-solarized}{%
+  \solarizedfalse
   \soldarkfalse
   \sollightfalse
 }
 
+% default option
 \ExecuteOptions{no-solarized}
 
 \ProcessOptions
@@ -45,16 +49,32 @@
 \definecolor{green}{HTML}{859900}
 
 
-\let\reftagform@=\tagform@
+\ifsolarized
+  \let\reftagform@=\tagform@
+\fi
 
 
-%light theme
+%% dark theme
 \ifsoldark
   \pagecolor{base03}
   \color{base0}
   \AtBeginEnvironment{itemize}{\color{base01}}
   \AtBeginEnvironment{equation}{\color{yellow}}
   \everymath{\color{yellow}}
+
+  % highlight text shapes
+  \DeclareTextFontCommand{\textit}{\color{base2}\itshape}
+  \DeclareTextFontCommand{\textbf}{\color{base1}\bfseries}
+  \DeclareTextFontCommand{\textsc}{\color{green}\scshape}
+  \DeclareTextFontCommand{\texttt}{\color{blue}\ttfamily}
+
+  \def\tagform@#1{\maketag@@@{%
+    (\ignorespaces\textcolor{base0}{#1}%
+    \unskip\@@italiccorr)
+  }}
+
+  % light background for floats
+  \RequirePackage{floatrow}
   \DeclareColorBox{shaded}{\colorbox{base02}}
   \floatsetup{%
     framestyle=colorbox,%
@@ -69,18 +89,21 @@
     labelfont=label,%
     textfont=text%
   }
-  \def\tagform@#1{\maketag@@@{%
-    (\ignorespaces\textcolor{base0}{#1}%
-    \unskip\@@italiccorr)
-  }}
 \fi
 
+%% light theme
 \ifsollight
   \pagecolor{base3}
   \color{base00}
   \AtBeginEnvironment{itemize}{\color{base1}}
   \AtBeginEnvironment{equation}{\color{orange}}
   \everymath{\color{orange}}
+
+  \DeclareTextFontCommand{\textit}{\color{base02}\itshape}
+  \DeclareTextFontCommand{\textbf}{\color{base01}\bfseries}
+  \DeclareTextFontCommand{\textsc}{\color{cyan}\scshape}
+  \DeclareTextFontCommand{\texttt}{\color{orange}\ttfamily}
+
   \def\tagform@#1{\maketag@@@{%
     (\ignorespaces\textcolor{base00}{#1}%
     \unskip\@@italiccorr)

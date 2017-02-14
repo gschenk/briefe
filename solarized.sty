@@ -2,7 +2,30 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \ProvidesPackage{solarized}
   [2012/04/03 own frequently used definitons]
-\RequirePackage{xcolor,everysel,etoolbox,sectsty,floatrow,caption}
+\RequirePackage{xcolor,everysel,etoolbox,floatrow,caption,ifthen}
+
+\newif\ifsoldark
+
+\newif\ifsollight
+
+\DeclareOption{dark}{%
+  \soldarktrue
+  \sollightfalse
+}
+
+\DeclareOption{light}{%
+  \sollighttrue
+  \soldarkfalse
+}
+
+\DeclareOption{no-solarized}{%
+  \soldarkfalse
+  \sollightfalse
+}
+
+\ExecuteOptions{no-solarized}
+
+\ProcessOptions
 
 \definecolor{base03}{HTML}{002B36}
 \definecolor{base02}{HTML}{073642}
@@ -23,6 +46,7 @@
 
 
 \let\reftagform@=\tagform@
+
 
 %light theme
 \ifsoldark
@@ -49,20 +73,20 @@
     (\ignorespaces\textcolor{base0}{#1}%
     \unskip\@@italiccorr)
   }}
-\else
+\fi
+
+\ifsollight
   \pagecolor{base3}
   \color{base00}
   \AtBeginEnvironment{itemize}{\color{base1}}
   \AtBeginEnvironment{equation}{\color{orange}}
   \everymath{\color{orange}}
-  \sectionfont{\color{base01}}
   \def\tagform@#1{\maketag@@@{%
     (\ignorespaces\textcolor{base00}{#1}%
     \unskip\@@italiccorr)
   }}
 \fi
 
-\renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
 %
 
 %common

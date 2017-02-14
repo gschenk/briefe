@@ -11,7 +11,7 @@ RECIPIENT=private/recipient.lco
 ADSCR = readAddress.py
 
 # configuration
-STY = mydefs.sty mylanguage.sty
+STY = mydefs.sty mylanguage.sty solarized.sty
 
 LCO = layout.lco german.lco english.lco DIN5008A.lco
 

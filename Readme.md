@@ -1,5 +1,15 @@
+A LaTeX Business Letter Template
+================================
+
 Repository for Business Letters
 following DIN 5008 and DIN 676
+
+Using the letter options of the KOMA
+project by Markus Kohm:
+http://www.komascript.de/
+
+Address Database Function
+-------------------------
 
 Recipient and sender data may be
 stored in the 'private' directory.
@@ -23,6 +33,21 @@ based on the respective .yaml address file.
 branches where these were filled
 with private data public.*
 
+solarized branch
+----------------
+
+This branch allows to change the colour scheme of
+the output pdf to solarized. Due to reduced contrast
+it may be easier to read when ambient light is not
+very bright.
+
+The solarized colour scheme was developed by
+Ethan Schoonover and can be found at:
+http://ethanschoonover.com/solarized
+
+The *solarized.sty* package accepts the options
+*dark* and *light* no option renders the letter
+unchanged, ie black on white.
 
 The repo of python scripts can be found on github:
 git@github.com:gschenk/address-stuff.git

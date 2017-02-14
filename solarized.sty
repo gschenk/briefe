@@ -110,8 +110,51 @@
   }}
 \fi
 
-%
 
+%% colour puncuation glyphs
+
+% following the method by David Carlisle at
+% http://tex.stackexchange.com/a/213427/82099
+
+  \def\zz#1{\textcolor{color#1}{#1}}
+
+  % define colours for punctuation marks
+  \colorlet{color.}{blue}
+  \colorlet{color,}{orange}
+  \colorlet{color:}{cyan}
+  \colorlet{color;}{red}
+  \colorlet{color?}{violet}
+  \colorlet{color!}{green}
+  \colorlet{color'}{magenta}
+
+\ifsolarized
+  \RequirePackage{xparse,l3regex}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\coloursyn}{ m  }
+  {
+    \coloursyn:nn { #1  }
+  }
+
+  %defining a new tocken list
+  \tl_new:N \l_syn_tl
+  \cs_new_protected:Npn \coloursyn:nn #1
+  {
+    %setting l_syn_tl to the string-argument
+    \tl_set:Nn \l_syn_tl { #1  }
+      %Coloring A and a by replacing them in
+      % the string and overriding l_syn_tl with
+      % the new string
+        \regex_replace_all:nnN { ([\.,;:?!'])  } { \c{zz}\cB\{\1\cE\}  } \l_syn_tl
+           %Using \l_syn_tl as output
+           \tl_use:N \l_syn_tl
+
+  }
+  \ExplSyntaxOff
+
+\else
+  % provide effectless command
+  \providecommand{\coloursyn}[1]{#1}
+\fi
 %common
 
 

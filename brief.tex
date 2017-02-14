@@ -19,7 +19,7 @@
 
 %% body of the letter
 \begin{document}
- \coloursyn{ %this colours interpunctation glyphs
+% \coloursyn{ %this colours interpunctation glyphs
   % modify address in private/recipient.lco or through
   % the addressee's yaml file
   \begin{letter}{}
@@ -32,13 +32,13 @@
     \opening{%
       \usekomavar{opening}
     }
-      \lipsum[1]  %lorem ipsum
+    \lipsum[1]  %lorem ipsum
     \closing{%
       Mit besten Grüssen,
     }
     %\encl{}
   \end{letter}
- }
+% }
 \end{document}
 
 % vim: set ai ft=tex expandtab shiftwidth=2 softtabstop=2 fdm=marker spelllang=de_20 spell:

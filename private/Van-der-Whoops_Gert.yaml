@@ -1,0 +1,13 @@
+familyName: Van~der~Whoops
+givenName: Gert
+nameLanguage: de
+theAddress:
+  academicDegreeInSalutation: Professor
+  academicDegrees: Prof. Dr.
+  city: Den Haag
+  country: Netherlands
+  houseNumber: '100'
+  postalCode: '2511'
+  street: Slangenwortel
+  styleInSalutation: Herr
+  companyName: "Rijksmuseum in Den Haag"

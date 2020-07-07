@@ -311,13 +311,15 @@ else:  # assumes an English salutation
     style = style_in_salut(entries["theAddress"])
     degree = degrees(entries["theAddress"])
     if degree == "professor":
-        salutation = "Dear professor " + f_name + ","
+        salutation = "Dear professor " + f_name
 
     elif style:
         salutation = ("Dear " + style
-                      + " " + f_name + ",")
+                      + " " + f_name + "")
+    elif g_name:
+        salutation = ("Dear" + " " + fullname)
     else:
-        salutation = "To whom it may concern,"
+        salutation = "To whom it may concern"
 
 
 # print the latex statement
